@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,15 +22,14 @@ import lombok.Setter;
 @Table(name = "hotel")
 public class Hotel {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private	Long id;
+	private Long id;
 
 	@Column(nullable = false)
-	private	String name;
+	private String name;
 
-	private	String city;
+	private String city;
 	@Column(columnDefinition = "TEXT[]")
 	private String[] photos;
 
@@ -41,14 +41,14 @@ public class Hotel {
 
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
 
 	@Embedded
-   private HotelContactInfo hotelContactInfo;
-	
+	private HotelContactInfo hotelContactInfo;
+
 	@Column(nullable = false)
 	private Boolean active;
- 
 
+	@ManyToOne
+	private User owner;
 
 }
